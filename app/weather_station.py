@@ -133,7 +133,7 @@ def get_temp():
 def broadcast_info(info):
     print("dumping weather_data as json...")
     print(json.dumps(info))
-    #r = requests.post("192.168.1.9:8080", json.dumps(info))
+    sys.stdout.flush()
 
 def main():
     global last_temp
