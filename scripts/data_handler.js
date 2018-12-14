@@ -1,10 +1,14 @@
-var spawn = require('child_process').spawn;
-var py = spawn('python', ['-u' ,'../app/weather_station.py']);
+function start(){
+	var spawn = require('child_process').spawn;
+	var py = spawn('python',['-u', '../app/weather_station.py'])
 
-py.stdout.on('data', function(data){	
-	console.log(data.toString('utf8'));
-});
+	py.stdout.on('data', function(data){
+		console.log(data.toString('utf8'));
+	});	
 
-py.stderr.on('data', function(data){
-  console.log("Error: " + data);
-});
+	py.stderr.on('data', function(data){
+		console.log("Error: " + data);
+	});
+	return true;
+
+}
