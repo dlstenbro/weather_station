@@ -38,7 +38,7 @@ WU_URL = "http://weatherstation.wunderground.com/weatherstation/updateweathersta
 SINGLE_HASH = "#"
 HASHES = "########################################"
 SLASH_N = "\n"
-
+SERVER_URL = "http://192.168.1.9:8080/update"
 # constants used to display an up and down arrows plus bars
 # modified from https://www.raspberrypi.org/learning/getting-started-with-the-sense-hat/worksheet/
 # set up the colours (blue, red, empty)
@@ -131,9 +131,13 @@ def get_temp():
     return t_corr
 
 def broadcast_info(info):
-    print("dumping weather_data as json...")
-    print(json.dumps(info))
-    sys.stdout.flush()
+    try:
+        upload_url = SERVER_URL + "?" + urlencode(info)
+        response = urllib2.urlopen(upload_url)
+        html = response.read()
+        response.close()  # best practice to close the file
+    except:
+        print("Exception:", sys.exc_info()[0], SLASH_N)
 
 def main():
     global last_temp
@@ -184,7 +188,7 @@ def main():
                 "humidity": str(humidity),
                 "baromin": str(pressure),
             }
-	    broadcast_info(weather_data)
+            broadcast_info(weather_data)
             # get the current minute
             current_minute = datetime.datetime.now().minute
             # is it the same minute as the last time we checked?
