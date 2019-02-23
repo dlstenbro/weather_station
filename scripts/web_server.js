@@ -1,28 +1,34 @@
-var http = require('http');
-var fs = require('fs');
-var port = "8080";
+const express = require('express');
+const fs = require('fs')
+const app = express();
+const path = require('path');
+const port = 8080;
+const root_dir = __dirname + '/..'
 
-var server = http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    console.log('request was made: ' + req.url);
+const bodyParser = require('body-parser');
+const url = require('url');
+const querystring = require('querystring');
 
-    // weather_station/scripts/web_server.js
-    var parent_path = __dirname + "/../";
-    if(req.url == "/")
-    {
-	var myReadStream = fs.createReadStream("index.html", 'utf8');
-    }    
-    else if(req.url == "/favicon.ico")
-    {
-	var myReadStream = fs.createReadStream("favicon.ico", 'utf8');
-    }
-    else{
-	var myReadStream = fs.createReadStream(parent_path + req.url, 'utf8');
-    }
-    myReadStream.pipe(res);
-})
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-server.listen(port);
-console.log("Server started! Listening on port " + port );
+app.get('/', (request, response) => {
+  response.sendFile(path.join(root_dir + '/favicon.ico'));
+});
 
+app.get('/index.html', (request, response) => {
+  response.sendFile(path.join(root_dir + '/index.html'));
+});
 
+app.get('/update', (request, response) => {
+  response.sendFile(path.join(root_dir + '/index.html'));
+  console.log(request.query);
+});
+
+app.listen(port, (err) => {
+  if (err) {
+    return console.log('port is in use!', err);
+  }
+
+  console.log(`server is listening on ${port}`);
+});
