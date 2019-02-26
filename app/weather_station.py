@@ -132,9 +132,9 @@ def get_temp():
 
 def broadcast_info(info):
     try:
-        upload_url = SERVER_URL + "?" + urlencode(info)
-        response = urllib2.urlopen(upload_url)
-        html = response.read()
+        #upload_url = SERVER_URL + "?" + urlencode(info)
+        response = requests.post(SERVER_URL, data=info)
+        print(response.status_code, response.reason)
         response.close()  # best practice to close the file
     except:
         print("Exception:", sys.exc_info()[0], SLASH_N)

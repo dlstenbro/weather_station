@@ -9,6 +9,8 @@ const bodyParser = require('body-parser');
 const url = require('url');
 const querystring = require('querystring');
 
+var jsonData = {}
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -20,9 +22,22 @@ app.get('/index.html', (request, response) => {
   response.sendFile(path.join(root_dir + '/index.html'));
 });
 
-app.get('/update', (request, response) => {
+app.get('/update_client', (request, response) => {
+  response.send(jsonData);
+});
+
+app.post('/update', (request, response) => {
   response.sendFile(path.join(root_dir + '/index.html'));
-  console.log(request.query);
+  jsonData = request.body;
+  console.log(jsonData);
+});
+
+app.post('/update', (request, response) => {
+  console.log(jsonData);
+});
+
+app.get('/scripts/client.js', (request, response) => {
+  response.sendFile(path.join(root_dir + '/scripts/client.js'));
 });
 
 app.listen(port, (err) => {
