@@ -9,11 +9,21 @@ if(window.XMLHttpRequest){
 
 }
 
+// ajax call to fetch data every 5 seconds from server
+function fetchdata(){
+ $.ajax({
+  url: '/update_client',
+  type: 'get',
+  success: function(data){
+   // Perform operation on return value
+   console.log(data);
+  },
+  complete:function(data){
+   setTimeout(fetchdata,5000);
+  }
+ });
+}
 
-var data_element = document.getElementById("data").innerHTML;
-console.log(data_element);
-
-document.getElementById("data").innerHTML = "update data";
-
-//xmlhttp.open("GET", "/scripts/test.txt", true);
-//xmlhttp.send();
+$(document).ready(function(){
+ setTimeout(fetchdata,5000);
+});
