@@ -32,10 +32,6 @@ app.post('/update', (request, response) => {
   console.log(jsonData);
 });
 
-app.post('/update', (request, response) => {
-  console.log(jsonData);
-});
-
 app.get('/scripts/client.js', (request, response) => {
   response.sendFile(path.join(root_dir + '/scripts/client.js'));
 });

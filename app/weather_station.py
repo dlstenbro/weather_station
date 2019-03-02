@@ -188,7 +188,12 @@ def main():
                 "humidity": str(humidity),
                 "baromin": str(pressure),
             }
-            broadcast_info(weather_data)
+            user_data = {
+                "tempf": str(temp_f),
+                "humidity": str(humidity),
+                "baromin": str(pressure),
+            }
+            broadcast_info(user_data)
             # get the current minute
             current_minute = datetime.datetime.now().minute
             # is it the same minute as the last time we checked?
