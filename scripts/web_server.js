@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(root_dir + '/favicon.ico'));
+  response.redirect('/index.html')
 });
 
 app.get('/index.html', (request, response) => {
