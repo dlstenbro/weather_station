@@ -132,9 +132,9 @@ def get_temp():
 
 def broadcast_info(info):
     try:
-        upload_url = SERVER_URL + "?" + urlencode(info)
-        response = urllib2.urlopen(upload_url)
-        html = response.read()
+        #upload_url = SERVER_URL + "?" + urlencode(info)
+        response = requests.post(SERVER_URL, data=info)
+        print(response.status_code, response.reason)
         response.close()  # best practice to close the file
     except:
         print("Exception:", sys.exc_info()[0], SLASH_N)
@@ -188,7 +188,12 @@ def main():
                 "humidity": str(humidity),
                 "baromin": str(pressure),
             }
-            broadcast_info(weather_data)
+            user_data = {
+                "tempf": str(temp_f),
+                "humidity": str(humidity),
+                "baromin": str(pressure),
+            }
+            broadcast_info(user_data)
             # get the current minute
             current_minute = datetime.datetime.now().minute
             # is it the same minute as the last time we checked?
