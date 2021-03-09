@@ -1,0 +1,43 @@
+h1 {
+  background-color: #a4d9f5;
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+body {
+  background-color: #7dc8f0; /* light blue */
+}
+.column {
+  float: left;
+  width: 550px;
+  height: 100px;
+}
+
+.sensor-card {
+  extends: .card;
+}
+
+.card > {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  background-color: white;
+  alignment: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #7dc8f0;
+  color: black;
+  text-align: center;
+}
