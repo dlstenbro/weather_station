@@ -13,7 +13,7 @@ WU_URL = "http://weatherstation.wunderground.com/weatherstation/updateweathersta
 SINGLE_HASH = "#"
 HASHES = "########################################"
 SLASH_N = "\n"
-SERVER_URL = "http://192.168.1.9:8080/update"
+SERVER_URL = "http://raspberrypi:8080/update"
 
 b = [0, 0, 255]  # blue
 r = [255, 0, 0]  # red
